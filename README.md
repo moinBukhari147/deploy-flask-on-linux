@@ -8,6 +8,8 @@ How to setup and deploy the flask project on linux in production
 ```sh
 	curl https://pyenv.run | bash
 ```
+
+
 ## 2  Add pyenv to Your Shell:
 - After installing pyenv, you need to add it to your shell's configuration file (e.g., .bashrc, .bash_profile, .zshrc, etc.) to make it available in your terminal sessions.
 - Check the .bash_profile exist:
