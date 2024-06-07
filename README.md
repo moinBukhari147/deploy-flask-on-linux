@@ -76,7 +76,10 @@ python -m venv project_env
 
 -  Install project-specific dependencies using pip and a requirements.txt file
 -  Make sure you have requirements.txt file in you project root folder.
-``` pip install -r requirements.txt ```
+  
+```
+pip install -r requirements.txt
+```
 
 
 
