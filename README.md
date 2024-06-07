@@ -45,7 +45,7 @@ How to setup and deploy the flask project on linux in production
 
 
 
-## 4 Cloning Repository and Dependency Installation
+# 4 Cloning Repository and Dependency Installation
 - Clone your Git repository or pull the latest changes if you've already cloned it:
     ```bash
     git clone <repository_url>
