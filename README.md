@@ -1,10 +1,10 @@
 # deploy-flask-on-linux
 How to setup and deploy the flask project on linux in production
 
-# Installation:
+
 ## 1 Install Python Version Management Tool:
--	Python version managment tool is used to install specific version of python for different project according to the requiremnts.
--	One commonly used Python version management tool is pyenv. You can install pyenv on Linux using its installer script. Open termial and paste:
+	-	Python version managment tool is used to install specific version of python for different project according to the requiremnts.
+	-	One commonly used Python version management tool is pyenv. You can install pyenv on Linux using its installer script. Open termial and paste:
   ```sh
     curl https://pyenv.run | bash
  ```
@@ -123,8 +123,9 @@ other loglevel options are:*
 
 ## 10 Restart Supervisor:
 - Create the log files directory if not created
-```sudo mkdir /var/log/gunicorn }
-{ sudo systemctl restart supervisor
+```
+sudo mkdir /var/log/gunicorn
+sudo systemctl restart supervisor
 sudo supervisorctl reread
 sudo supervisorctl update
 sudo supervisorctl status
@@ -135,3 +136,48 @@ sudo supervisorctl status
 	
 -- if there is some sytaxt error you can check from this command:
 ```sudo supervisord -n -c /etc/supervisor/supervisord.conf ```
+
+## 11 Managing Firewall Rules with UFW
+
+The Uncomplicated Firewall (UFW) is a user-friendly interface for managing firewall rules on Linux systems.
+
+
+- If UFW is not installed on your system, you can install it using the following command:
+
+```bash
+sudo apt-get install ufw
+```
+
+- Allow Incoming Traffic to Specific Port
+```bash
+sudo ufw allow 4090/tcp
+```
+
+- Once you have allowed the necessary ports, enable UFW to start enforcing the rules
+```bash
+sudo ufw enable
+```
+
+- You can check the status of UFW to ensure that it's active and allowing traffic to the specified ports
+```bash
+sudo ufw status
+```
+
+## 12 NginX Configuration
+```bash
+server {
+    listen 80;
+    server_name example.com;
+    your nginx configuration;
+
+    location / {
+	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://your-ip-address:4090;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
